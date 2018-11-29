@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<!-- 修改后 重新加载xml -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 打开开发模式 -->
+	<constant name="struts.devMode" value="true" />
+
+	<package name="user" extends="struts-default"
+		strict-method-invocation="false">
+		<interceptors>
+			<!-- 声明自定义拦截器 -->
+			<interceptor name="check" class="com.hq.interceptor.CheckUser" />
+			<!-- 自定义拦截器栈 -->
+			<interceptor-stack name="myStack">
+				<!-- 添加拦截器 -->
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="check" />
+			</interceptor-stack>
+		</interceptors>
+		
+		
+		<action name="user_*" class="userAction" method="{1}">
+		
+		
+			<result>/frame.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+
+	</package>
+
+
+</struts>   
